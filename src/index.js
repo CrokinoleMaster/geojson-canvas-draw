@@ -52,6 +52,26 @@ class GeojsonCanvas {
         this._render()
     }
 
+    on(event, callback) {
+        if (event === 'mouseup') {
+            this._onMouseUp = (e) => {
+                console.log(e)
+            }
+            this._canvas.removeEventListener('mouseup', this._onMouseUp)
+            this._canvas.addEventListener('mouseup', this._onMouseUp)
+        } else if (event === 'mouseover') {
+            this._onMouseOver = (e) => {
+                console.log(e)
+            }
+            this._canvas.removeEventListener('mouseover', this._onMouseOver)
+            this._canvas.addEventListener('mouseover', this._onMouseOver)
+        } else {
+            console.error(`unsupported event - "${event}"`)
+            return
+        }
+
+    }
+
     _render() {
         this._features.forEach((feature) => {
             let style = feature.style || this._style.point

@@ -48,4 +48,6 @@ geojsonCanvas.addGeojson({
     }
 }, { color: '#ff0000', weight: 5, fill: true })
 
+geojsonCanvas.on('mouseup', () => {return})
+
 console.log(geojsonCanvas._features)
