@@ -46,12 +46,15 @@ geojsonCanvas.addGeojson({
             [140, 100],
             [100, 100]
         ]]
+    },
+    "properties": {
+        "name": "blue rect"
     }
 }, { color: '#ff0000', weight: 5, fill: true })
 
 geojsonCanvas.on('mouseup', (e) => {
-    console.log(e.point)
-    geojsonCanvas.addPoint(e.point, {color: '#ff0000'})
+    // geojsonCanvas.addPoint(e.point, {color: '#ff0000'})
+    console.log(geojsonCanvas.queryFeatures(e.point))
 })
 
 // console.log(geojsonCanvas._features)

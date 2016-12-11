@@ -60,6 +60,26 @@ class GeojsonCanvas {
         this.addGeojson(turf.polygon(coords, properties), style)
     }
 
+    // LIFO - last added first
+    queryFeatures(coord) {
+        let queryPoint = turf.point(coord)
+        let result = []
+        this._features.reverse().forEach((feature) => {
+            if (feature.geometry.type === 'Point') {
+                let radius = feature.style.radius
+                let dist = turf.distance(feature, queryPoint)
+                if (dist <= radius) {
+                    result.push(feature)
+                }
+            } else if (feature.geometry.type === 'Polygon') {
+                if (turf.inside(queryPoint, feature)) {
+                    result.push(feature)
+                }
+            }
+        })
+        return result
+    }
+
     on(event, callback) {
         if (event === 'mouseup') {
             let onMouseUp = (e) => {
