@@ -14,5 +14,6 @@
     "gulp-browserify": "^0.5.1",
     "gulp-rename": "^1.2.2",
     "gulp-uglify": "^2.0.0"
-  }
+  },
+  "dependencies": {}
 }
