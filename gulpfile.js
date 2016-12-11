@@ -11,14 +11,23 @@ gulp.task('browserify-source', function() {
     .pipe(browserify({
       insertGlobals: false
     }))
-    .pipe(rename('bundle.js'))
+    .pipe(rename('geojson-canvas.js'))
     .pipe(gulp.dest('build'))
 });
 
-gulp.task('watch', function() {
-  gulp.watch('src/**/*.js', ['browserify-source']);
+gulp.task('browserify-test', function() {
+  return gulp.src('test/app.js')
+    .pipe(browserify({
+      insertGlobals: false
+    }))
+    .pipe(rename('app.js'))
+    .pipe(gulp.dest('.'))
 });
 
-gulp.task('build', ['browserify-source']);
+gulp.task('watch', function() {
+  gulp.watch(['src/**/*.js', 'test/**/**.js'], ['browserify-source', 'browserify-test']);
+});
+
+gulp.task('build', ['browserify-source', 'browserify-test']);
 
 gulp.task('default', ['build', 'watch']);
