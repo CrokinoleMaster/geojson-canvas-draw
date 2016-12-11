@@ -1,5 +1,6 @@
 let geojsonCanvas = new GeojsonCanvas('canvas-view')
 
+
 geojsonCanvas.addGeojson({
     "type": "Feature",
     "geometry": {
