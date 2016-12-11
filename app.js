@@ -49,7 +49,9 @@ geojsonCanvas.addGeojson({
     }
 }, { color: '#ff0000', weight: 5, fill: true })
 
-geojsonCanvas.on('mouseup', () => {return})
+geojsonCanvas.on('mouseup', (e) => {
+    console.log(e.point)
+})
 
 console.log(geojsonCanvas._features)
 

@@ -52,17 +52,25 @@ class GeojsonCanvas {
         this._render()
     }
 
+    addPoint(pos) {
+        this.addGeojson(turf.point(pos))
+    }
+
     on(event, callback) {
         if (event === 'mouseup') {
             let onMouseUp = (e) => {
-                console.log(e)
+                let pos = this._getCursorPos(e)
+                e.point = pos
+                callback(e)
             }
             this._canvas.removeEventListener('mouseup', this._onMouseUp)
             this._canvas.addEventListener('mouseup', onMouseUp)
             this._onMouseUp = onMouseUp
         } else if (event === 'mouseover') {
             let onMouseOver = (e) => {
-                console.log(e)
+                console.log(this._getCursorPos(e))
+                e.point = pos
+                callback(e)
             }
             this._canvas.removeEventListener('mouseover', this._onMouseOver)
             this._canvas.addEventListener('mouseover', onMouseOver)
@@ -72,6 +80,15 @@ class GeojsonCanvas {
             return
         }
 
+    }
+
+    _getCursorPos(event) {
+        let x = event.clientX
+        let y = event.clientY
+        let bbox = this._canvas.getBoundingClientRect();
+        x = (x - bbox.left) * (this._canvas.width  / bbox.width)
+        y = (y - bbox.top) * (this._canvas.height / bbox.height)
+        return [x, y]
     }
 
     _render() {
