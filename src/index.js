@@ -55,7 +55,12 @@ class GeojsonCanvas {
     _render() {
         this._features.forEach((feature) => {
             let style = feature.style || this._style.point
-            renderPoint(feature, this._ctx, style)
+            if (feature.geometry.type === 'Point') {
+                renderPoint(feature, this._ctx, style)
+            }
+            if (feature.geometry.type === 'Polygon') {
+                renderPolygon(feature, this._ctx, style)
+            }
         })
     }
 
