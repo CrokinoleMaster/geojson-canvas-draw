@@ -54,17 +54,19 @@ class GeojsonCanvas {
 
     on(event, callback) {
         if (event === 'mouseup') {
-            this._onMouseUp = (e) => {
+            let onMouseUp = (e) => {
                 console.log(e)
             }
             this._canvas.removeEventListener('mouseup', this._onMouseUp)
-            this._canvas.addEventListener('mouseup', this._onMouseUp)
+            this._canvas.addEventListener('mouseup', onMouseUp)
+            this._onMouseUp = onMouseUp
         } else if (event === 'mouseover') {
-            this._onMouseOver = (e) => {
+            let onMouseOver = (e) => {
                 console.log(e)
             }
             this._canvas.removeEventListener('mouseover', this._onMouseOver)
-            this._canvas.addEventListener('mouseover', this._onMouseOver)
+            this._canvas.addEventListener('mouseover', onMouseOver)
+            this._onMouseOver = onMouseOver
         } else {
             console.error(`unsupported event - "${event}"`)
             return
