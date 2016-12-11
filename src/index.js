@@ -8,12 +8,29 @@ let { renderPoint, renderPolygon } = require('./renderGeometry')
 
 style = {
     point: {
-        color: '#ff0000',
-        size: 5
+        stroke:
+        color:
+        weight:
+        opacity:
+        fill:
+        fillColor:
+        fillOpacity:
+        radius:
     }
 }
 
 */
+
+const defaultStyle = {
+    stroke: true,
+    color: '#000',
+    weight: 2,
+    opacity: 1, // not implemented
+    fill: false,
+    fillColor: '#0000ff',
+    fillOpacity: 0.5, // not implemented
+    radius: 5 // for points only
+}
 
 class GeojsonCanvas {
 
@@ -21,12 +38,15 @@ class GeojsonCanvas {
         this._canvas = document.getElementById(canvasID)
         this._ctx = this._canvas.getContext('2d')
         this._features = []
-        this._style = style
+        this._style = Object.assign({}, {
+            point: defaultStyle,
+            polygon: defaultStyle
+        }, style)
     }
 
     addGeojson(geojson, style = {}) {
         turf.featureEach(geojson, (feature) => {
-            feature.style = style
+            feature.style = Object.assign({}, defaultStyle, style)
             this._features.push(feature)
         })
         this._render()
@@ -34,9 +54,8 @@ class GeojsonCanvas {
 
     _render() {
         this._features.forEach((feature) => {
-            let pointSize = feature.style.size || this._style.point.size
-            let pointColor = feature.style.color || this._style.point.color
-            renderPoint(feature, this._ctx, pointSize, pointColor)
+            let style = feature.style || this._style.point
+            renderPoint(feature, this._ctx, style)
         })
     }
 
