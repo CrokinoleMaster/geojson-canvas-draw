@@ -20,7 +20,7 @@ geojsonCanvas.addGeojson({
         "coordinates": [20, 30]
     },
     "properties": {
-        "name": "point 1"
+        "name": "point 2"
     }
 }, { color: '#00ff00', radius: 15, weight: 4 })
 
@@ -31,7 +31,7 @@ geojsonCanvas.addGeojson({
         "coordinates": [50, 30]
     },
     "properties": {
-        "name": "point 1"
+        "name": "point 3"
     }
 }, { color: '#ff0000', radius: 10, fill: true, fillColor: '#00ffff' })
 

@@ -67,7 +67,7 @@ class GeojsonCanvas {
         this._features.reverse().forEach((feature) => {
             if (feature.geometry.type === 'Point') {
                 let radius = feature.style.radius
-                let dist = turf.distance(feature, queryPoint)
+                let dist = turf.distance(feature, queryPoint, 'degrees')
                 if (dist <= radius) {
                     result.push(feature)
                 }
