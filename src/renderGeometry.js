@@ -9,7 +9,7 @@ let renderPoint = (feature, ctx, style) => {
     ctx.fillStyle = style.fillColor
     ctx.lineWidth = style.weight
     ctx.beginPath()
-    ctx.arc(coords[0], coords[1], radius, 0, 2.0 * Math.PI)
+    ctx.arc(coords[0], coords[1], radius, 0, 2 * Math.PI)
     style.stroke && ctx.stroke()
     style.fill && ctx.fill()
 }
